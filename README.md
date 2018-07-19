@@ -60,7 +60,15 @@ sudo apt-get install python-obspy
 
 ## Python scripts
 
-Work in progress.
+The ```read_sdp31.py``` script is the main script. This script uses the defenitions of ```sdp31.py```, which defines all different methods of reading the data. To use the main script some parameters are needed;
+
+```
+OSR - Sampling rate, only needed when using methods 0 or 2. Methods 1 and 3 have a sampling rate of 1000hz, while 4 and 5 sample at 22hz
+Measurement - The sensor got 6 different measurement methods. 0 and 2 are continuous measurements where the average value over the sampling time is taken as datapoint. 1 and 2 are continuous measurements with automatic updata, no averaging. 4 and 5 are triggered measurements.
+Recording time - Determining the length of recording.
+```
+
+The main script gives back 2 MSEED files, one with temperature counts and one with pressure counts. To convert those count in real values the ```conv_sdp31.py``` script is used.
 
 ## Author
 
