@@ -1,14 +1,14 @@
 #*******************************************************#
-#														#
-#		SDP3x - Sensirion Diff. Pressure sensor			#
-#														#
-#		Read-out script.								#
-#														#
-#		Olivier den Ouden								#
-#		Royal Netherlands Meterological Institute		#
-#		RD Seismology and Acoustics						#
-#		https://www.seabirdsound.org 					#
-#														#
+#							#
+#	SDP3x - Sensirion Diff. Pressure sensor		#
+#							#
+#	Read-out script.				#
+#							#
+#	Olivier den Ouden				#
+#	Royal Netherlands Meterological Institute	#
+#	RD Seismology and Acoustics			#
+#	https://www.seabirdsound.org 			#
+#							#
 #*******************************************************#
 
 # Modules
