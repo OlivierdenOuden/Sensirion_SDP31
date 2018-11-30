@@ -1,6 +1,6 @@
 # Sensirion_SDP31
 
-How to read-out the Sensirion SDP31 digital differetial pressure sensor by use of the I2C port on a Raspberry PI model 3B+. More info on the [SDP31 sensor](https://nl.mouser.com/datasheet/2/682/Sensirion_Differential_Pressure_Sensors_SDP3x_Digi-1093440.pdf) and the [I2C port](https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial).
+Read-out the Sensirion SDP3x digital differetial pressure sensor by use of the I2C port on a Raspberry PI model 3B+. More info on the [SDP3x sensor](https://nl.mouser.com/datasheet/2/682/Sensirion_Differential_Pressure_Sensors_SDP3x_Digi-1093440.pdf) and the [I2C port](https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial).
 
 ## Raspberry PI - I2C port 
 
@@ -38,15 +38,15 @@ pi@raspberrypi:~/$ i2cdetect -y 1
      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
 00:          -- -- -- -- -- -- -- -- -- -- -- -- --
 10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- 21 -- -- -- -- -- -- -- -- -- -- -- -- --
 30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-60: 60 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- --
 ```
 
-Here the I2C adress of the sensor is 0x60. More information, or source, can be found [here](https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial).
+Here the I2C adress of the sensor is 0x21. More information, or source, can be found [here](https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial).
 
 ## I2C - Python 
 
@@ -58,17 +58,18 @@ sudo apt-get install python-smbus
 sudo apt-get install python-obspy
 ```
 
-## Python scripts
+## Python scripts - simple script
 
-The ```read_sdp31.py``` script is the main script. This script uses the defenitions of ```sdp31.py```, which defines all different methods of reading the data. To use the main script some parameters are needed;
+To read out single/one shot data, use the simple scrip.
+
+## Python scripts - src
+
+The ```sdp31.py``` script is the data request script, which loops over a specific time interval with a sample rate. This script uses the defenitions of ```sdp31_main.py```, which defines all needed functions/defenitions. To use, the script need some arguments which will be listed by the help function (-h);
 
 ```
-OSR - Sampling rate, only needed when using methods 0 or 2. Methods 1 and 3 have a sampling rate of 1000hz, while 4 and 5 sample at 22hz
-Measurement - The sensor got 6 different measurement methods. 0 and 2 are continuous measurements where the average value over the sampling time is taken as datapoint. 1 and 2 are continuous measurements with automatic updata, no averaging. 4 and 5 are triggered measurements.
-Recording time - Determining the length of recording.
+-t       - Time of recording
+-fs      - Sampling rate
 ```
-
-The main script gives back 2 MSEED files, one with temperature counts and one with pressure counts. To convert those count in real values the ```conv_sdp31.py``` script is used.
 
 ## Author
 
